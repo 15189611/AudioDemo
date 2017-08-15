@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">AudioDemo</string>
+    <string name="title_draw_round_rect">自定View矩形</string>
+    <string name="title_draw_path">自定View爱心</string>
+    <string name="title_draw_bitmap">自定View图片</string>
+    <string name="title_draw_surface_view">自定surfaceView图片</string>
 </resources>
