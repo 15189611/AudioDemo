@@ -4,7 +4,7 @@
 
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -19,10 +19,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity android:name=".activity.DrawingActivity" />
         <activity android:name=".activity.AudioActivity" />
-
+        <activity android:name=".activity.VideoActivity" />
+        <activity android:name=".video.SurfaceViewActivity" />
+        <activity android:name=".video.TextureViewActivity"></activity>
     </application>
 
 </manifest>

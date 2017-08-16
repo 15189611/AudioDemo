@@ -100,9 +100,13 @@ public class AudioCapturerManager implements AudioCapturer.OnAudioFrameCapturedL
                 mAudioPlayer.play(buffer, 0, buffer.length);
             }
             //数据读完了 就停止播放
-            mAudioPlayer.stopPlayer();
+            if(mAudioPlayer != null){
+                mAudioPlayer.stopPlayer();
+            }
             try {
-                mWavFileReader.closeFile();
+                if(mWavFileReader != null){
+                    mWavFileReader.closeFile();
+                }
             } catch (IOException e) {
                 e.printStackTrace();
             }

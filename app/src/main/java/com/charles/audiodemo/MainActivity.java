@@ -7,6 +7,7 @@ import android.view.View;
 
 import com.charles.audiodemo.activity.AudioActivity;
 import com.charles.audiodemo.activity.DrawingActivity;
+import com.charles.audiodemo.activity.VideoActivity;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -27,7 +28,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void btn3(View view){
-
+        Intent intent = new Intent(this,VideoActivity.class);
+        startActivity(intent);
     }
 
     public void btn4(View view){
