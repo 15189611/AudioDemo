@@ -59,7 +59,7 @@
             android:background="@drawable/icon_record_play"
             android:gravity="center"
             android:textSize="14sp"
-            android:visibility="gone"
+            android:visibility="visible"
             tools:visibility="visible" />
 
 
@@ -94,7 +94,7 @@
             android:background="@drawable/icon_record_complete"
             android:gravity="center"
             android:textSize="14sp"
-            android:visibility="gone"
+            android:visibility="visible"
             tools:visibility="visible" />
 
 
@@ -108,8 +108,7 @@
         android:layout_below="@id/ll_icons"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="13dp"
-        android:text="长按录音"
+        android:text="开始录音"
         android:textSize="16sp" />
-
 
 </RelativeLayout>
