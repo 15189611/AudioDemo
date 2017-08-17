@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- camera -->
+    <item type="id" name="auto_focus"/>
+    <item type="id" name="request_preview"/>
+
+</resources>
