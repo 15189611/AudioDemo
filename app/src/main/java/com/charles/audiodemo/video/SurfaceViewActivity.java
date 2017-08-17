@@ -3,6 +3,7 @@ package com.charles.audiodemo.video;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.ImageFormat;
+import android.graphics.Matrix;
 import android.graphics.Rect;
 import android.graphics.YuvImage;
 import android.hardware.Camera;
@@ -73,6 +74,11 @@ public class SurfaceViewActivity extends AppCompatActivity implements SurfaceHol
                         ByteArrayOutputStream stream = new ByteArrayOutputStream();
                         image.compressToJpeg(new Rect(0, 0, size.width, size.height), 80, stream);
                         Bitmap bmp = BitmapFactory.decodeByteArray(stream.toByteArray(), 0, stream.size());
+                        //将采集的数据图片 旋转
+                        Matrix matrix = new Matrix();
+                        matrix.preRotate(90);
+                        bmp = Bitmap.createBitmap(bmp, 0, 0, bmp.getWidth(), bmp
+                                .getHeight(), matrix, true);
                         if (bmp != null) {
                             surfaceImage.setImageBitmap(bmp);
                         }
@@ -107,6 +113,7 @@ public class SurfaceViewActivity extends AppCompatActivity implements SurfaceHol
     @Override
     public void surfaceDestroyed(SurfaceHolder holder) {
         if (myCameraManager != null) {
+            cameraHandler.removeMessages(R.id.request_preview);
             myCameraManager.stopPreview();
             myCameraManager.closeDriver();
         }
@@ -117,6 +124,7 @@ public class SurfaceViewActivity extends AppCompatActivity implements SurfaceHol
     protected void onPause() {
         super.onPause();
         if (myCameraManager != null) {
+            cameraHandler.removeMessages(R.id.request_preview);
             myCameraManager.stopPreview();
             myCameraManager.closeDriver();
         }

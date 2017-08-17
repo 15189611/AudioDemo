@@ -46,7 +46,7 @@ final class CameraConfigurationManager {
     }
 
     void initFromCameraParameters(Camera camera) {
-        //获取Camera default format  PIXEL_FORMAT_YUV422SP
+        //获取Camera default format  PIXEL_FORMAT_YUV420SP
         Camera.Parameters parameters = camera.getParameters();
         int previewFormat = parameters.getPreviewFormat();
         String previewFormatString = parameters.get("preview-format");
@@ -256,6 +256,7 @@ final class CameraConfigurationManager {
         } else {
             displayDegree = (info.orientation - degrees + 360) % 360;
         }
+        Log.e(TAG,"setDisplayOrientation ==" + displayDegree);
         camera.setDisplayOrientation(displayDegree);
     }
 

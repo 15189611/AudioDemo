@@ -1,6 +1,7 @@
 package com.charles.audiodemo.video.camera;
 
 import android.content.Context;
+import android.graphics.SurfaceTexture;
 import android.hardware.Camera;
 import android.os.Build;
 import android.os.Handler;
@@ -65,6 +66,24 @@ public class MyCameraManager {
                 throw new IOException();
             }
             camera.setPreviewDisplay(holder);
+            if (!initialized) {
+                initialized = true;
+                configManager.initFromCameraParameters(camera);
+            }
+
+            configManager.setDesiredCameraParameters(camera);
+
+            FlashlightManager.enableFlashlight();
+        }
+    }
+
+    public void openDriver(SurfaceTexture surface) throws IOException {
+        if (camera == null) {
+            camera = Camera.open();
+            if (camera == null) {
+                throw new IOException();
+            }
+            camera.setPreviewTexture(surface);
             if (!initialized) {
                 initialized = true;
                 configManager.initFromCameraParameters(camera);
