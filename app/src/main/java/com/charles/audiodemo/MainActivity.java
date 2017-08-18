@@ -7,6 +7,7 @@ import android.view.View;
 
 import com.charles.audiodemo.activity.AudioActivity;
 import com.charles.audiodemo.activity.DrawingActivity;
+import com.charles.audiodemo.activity.MediaExtractorActivity;
 import com.charles.audiodemo.activity.VideoActivity;
 
 public class MainActivity extends AppCompatActivity {
@@ -33,7 +34,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void btn4(View view){
-
+        Intent intent = new Intent(this,MediaExtractorActivity.class);
+        startActivity(intent);
     }
 
 }
