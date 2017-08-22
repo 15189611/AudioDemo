@@ -7,6 +7,8 @@ import android.view.View;
 
 import com.charles.audiodemo.activity.AudioActivity;
 import com.charles.audiodemo.activity.DrawingActivity;
+import com.charles.audiodemo.activity.MediaCodecForAudio;
+import com.charles.audiodemo.activity.MediaCodecForVideo;
 import com.charles.audiodemo.activity.MediaExtractorActivity;
 import com.charles.audiodemo.activity.VideoActivity;
 
@@ -37,5 +39,16 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(this,MediaExtractorActivity.class);
         startActivity(intent);
     }
+
+    public void btn5(View view){
+        Intent intent = new Intent(this,MediaCodecForAudio.class);
+        startActivity(intent);
+    }
+
+    public void btn6(View view){
+        Intent intent = new Intent(this,MediaCodecForVideo.class);
+        startActivity(intent);
+    }
+
 
 }

@@ -31,7 +31,9 @@
         <activity android:name=".activity.VideoActivity" />
         <activity android:name=".video.SurfaceViewActivity" />
         <activity android:name=".video.TextureViewActivity" />
-        <activity android:name=".activity.MediaExtractorActivity"></activity>
+        <activity android:name=".activity.MediaExtractorActivity" />
+        <activity android:name=".activity.MediaCodecForAudio" />
+        <activity android:name=".activity.MediaCodecForVideo"/>
     </application>
 
 </manifest>

@@ -57,7 +57,7 @@ public class AudioCapturerManager implements AudioCapturer.OnAudioFrameCapturedL
 
     @Override
     public void onAudioFrameCaptured(byte[] audioData) {
-        //将读取的音频pcm数据 存起来
+        //将读取的音频pcm数据 用wav格式存起来
         mWavFileWriter.writeData(audioData, 0, audioData.length);
     }
 

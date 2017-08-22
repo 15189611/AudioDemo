@@ -39,8 +39,26 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginTop="10dp"
-        android:text="使用Android 平台的 MediaExtractor 和 MediaMuxer API"
+        android:text="使用MediaExtractor 和 MediaMuxer解析和生成mp4文件"
         android:onClick="btn4"
+        />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp"
+        android:text="MediaCodec API，完成音频 AAC 硬编、硬解"
+        android:onClick="btn5"
+        />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp"
+        android:text="MediaCodec API，完成视频 H.264 的硬编、硬解"
+        android:onClick="btn6"
         />
 
 </LinearLayout>
