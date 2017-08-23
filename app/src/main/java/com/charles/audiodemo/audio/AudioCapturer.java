@@ -24,6 +24,11 @@ public class AudioCapturer {
     private Thread mCaptureThread;
     private volatile boolean mIsLoopExit = false;
 
+
+    public boolean startCapture() {
+        return startCapture(DEFAULT_SOURCE, DEFAULT_SAMPLE_RATE, DEFAULT_CHANNEL_CONFIG, DEFAULT_DATA_FORMAT);
+    }
+
     public  boolean startCapture(int audioSource, int sampleRateInHz, int channelConfig, int audioFormat ){
         if (mIsCaptureStarted) {
             Log.e(TAG, "Capture already started !");
@@ -92,7 +97,7 @@ public class AudioCapturer {
                 } else {
                     Log.d("TAG", "Audio captured: " + buffer.length);
                     if (mAudioFrameCapturedListener != null) {
-                        //将读取到的数据回调出去，并且以wav格式存储起来
+                        //将读取到的数据回调出去
                         mAudioFrameCapturedListener.onAudioFrameCaptured(buffer);
                     }
                 }

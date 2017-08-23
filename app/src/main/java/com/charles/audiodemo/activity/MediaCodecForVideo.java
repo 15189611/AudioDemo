@@ -12,4 +12,6 @@ public class MediaCodecForVideo extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_media_codec_for_video);
     }
+
+    
 }
