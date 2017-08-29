@@ -107,6 +107,8 @@ public class MediaCodecForAudio extends AppCompatActivity implements AudioCaptur
     protected void onPause() {
         super.onPause();
         mIsTestingExit = true;
-        audioCapturer.stopCapture();
+        if(audioCapturer != null){
+            audioCapturer.stopCapture();
+        }
     }
 }

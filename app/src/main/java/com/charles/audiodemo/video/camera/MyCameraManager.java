@@ -1,5 +1,7 @@
 package com.charles.audiodemo.video.camera;
 
+import android.Manifest;
+import android.app.Activity;
 import android.content.Context;
 import android.graphics.SurfaceTexture;
 import android.hardware.Camera;
@@ -9,8 +11,11 @@ import android.util.Log;
 import android.view.SurfaceHolder;
 
 import com.charles.audiodemo.IPreviewCallBack;
+import com.tbruyelle.rxpermissions.RxPermissions;
 
 import java.io.IOException;
+
+import rx.functions.Action1;
 
 /**
  * Created by Charles.
@@ -40,10 +45,14 @@ public class MyCameraManager {
     private static MyCameraManager cameraManager;
     private final CameraConfigurationManager configManager;
     static final int SDK_INT; // Later we can use Build.VERSION.SDK_INT
+    private static RxPermissions  rxPermissions;
 
     public static void init(Context context) {
         if (cameraManager == null) {
             cameraManager = new MyCameraManager(context);
+        }
+        if(rxPermissions == null){
+            rxPermissions = new RxPermissions((Activity) context);
         }
     }
 
@@ -59,39 +68,62 @@ public class MyCameraManager {
         autoFocusCallback = new AutoFocusCallback();
     }
 
-    public void openDriver(SurfaceHolder holder) throws IOException {
+    public void openDriver(final SurfaceHolder holder) throws IOException {
         if (camera == null) {
-            camera = Camera.open();
-            if (camera == null) {
-                throw new IOException();
-            }
-            camera.setPreviewDisplay(holder);
-            if (!initialized) {
-                initialized = true;
-                configManager.initFromCameraParameters(camera);
-            }
-
-            configManager.setDesiredCameraParameters(camera);
-
-            FlashlightManager.enableFlashlight();
+            rxPermissions
+                    .request(Manifest.permission.CAMERA)
+                    .subscribe(new Action1<Boolean>() {
+                        @Override
+                        public void call(Boolean granted) {
+                            if (granted) { // Always true pre-M
+                                try {
+                                    camera = Camera.open();
+                                    if (camera == null) {
+                                        throw new IOException();
+                                    }
+                                    camera.setPreviewDisplay(holder);
+                                    if (!initialized) {
+                                        initialized = true;
+                                        configManager.initFromCameraParameters(camera);
+                                    }
+                                    configManager.setDesiredCameraParameters(camera);
+                                    FlashlightManager.enableFlashlight();
+                                } catch (IOException e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                        }
+                    });
         }
     }
 
-    public void openDriver(SurfaceTexture surface) throws IOException {
+    public void openDriver(final SurfaceTexture surface) throws IOException {
         if (camera == null) {
-            camera = Camera.open();
-            if (camera == null) {
-                throw new IOException();
-            }
-            camera.setPreviewTexture(surface);
-            if (!initialized) {
-                initialized = true;
-                configManager.initFromCameraParameters(camera);
-            }
+            rxPermissions
+                    .request(Manifest.permission.CAMERA)
+                    .subscribe(new Action1<Boolean>() {
+                        @Override
+                        public void call(Boolean granted) {
+                            if (granted) { // Always true pre-M
+                                try {
+                                    camera = Camera.open();
+                                    if (camera == null) {
+                                        throw new IOException();
+                                    }
+                                    camera.setPreviewTexture(surface);
+                                    if (!initialized) {
+                                        initialized = true;
+                                        configManager.initFromCameraParameters(camera);
+                                    }
+                                    configManager.setDesiredCameraParameters(camera);
 
-            configManager.setDesiredCameraParameters(camera);
-
-            FlashlightManager.enableFlashlight();
+                                    FlashlightManager.enableFlashlight();
+                                } catch (IOException e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                        }
+                    });
         }
     }
 
@@ -127,6 +159,7 @@ public class MyCameraManager {
                 camera.setPreviewCallback(null);
             }
             camera.stopPreview();
+            rxPermissions = null;
             previewCallback.setHandler(null, 0);
             autoFocusCallback.setHandler(null, 0);
             previewing = false;
